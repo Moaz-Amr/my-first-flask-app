@@ -1,0 +1,38 @@
+name: flask project workflow
+# اول ميحصل بوش علي main هينفز الاتي 
+# ممكن تضيف اكتر من برانش
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test_flask_app:
+  # name of job
+    runs-on: ubuntu-latest
+    # name of compiler runner 
+    
+    steps:
+      # الهدف التاكد من ان المشروع يعمل 
+      - name: Checkout Repository 
+      # هبحث في السيرش عن actions/checkout 
+        uses: actions/checkout@v4
+        
+      - name: Setup Python
+      # هبحث في السيرش عن actions/setup python
+      # وهدخل عند uses
+        uses: actions/setup-python@v5 
+        with:
+          python-version: '3.12'
+          
+      - name: Install Dependencies
+      # مش محتاج حاجه بلد ان علشان اصطبهم
+      # | علشان احط اكتر من امر
+        run: |
+          pip install flask
+          pip install pytest
+
+      - name: Run Test Cases
+        run: pytest -v -s
+        # cicp
+      
